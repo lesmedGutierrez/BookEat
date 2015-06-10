@@ -40,3 +40,13 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.noPadding{
+    padding-left: 0;
+    padding-right: 0;
+}
+.noPaddingbookBtn{
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 50%;
+}

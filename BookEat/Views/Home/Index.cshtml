@@ -4,24 +4,37 @@
 
 <div class="jumbotron">
     <h1>Haga su reservación</h1>
-    <div>
-        <select id="peopleSlt" class="selectpicker show-menu-arrow" data-live-search="false">
-            <option value="1">1 Persona</option>
-            <option value="2">2 Personas</option>
-            <option value="3">3 Personas</option>
-            <option value="4">4 Personas</option>
-        </select>
-        <input type="text" class="form-control-static" id="datepicker" value="06/01/2015">
-        <select id="timeSlt" class="selectpicker" data-width="250px" data-live-search="false">
-            <option value="1">6:00 PM</option>
-            <option value="2">7:00 PM</option>
-            <option value="3">8:00 PM</option>
-            <option value="4">9:00 PM</option>
-            <option value="5">10:00 PM</option>
-            <option value="6">11:00 PM</option>
-        </select>
-        <button type="button" class="btn btn-primary btn-md" id="bookBtn">Reservar</button>
-    </div>
+    <div class="row no-gutter">
+        <div class="col-lg-3 noPadding">
+            <input type="text" class="form-control" placeholder="Busque un restaurante">
+        </div>
+        <div class="col-lg-2 noPadding">
+            <select id="peopleSlt" class="form-control selectpicker show-menu-arrow" data-live-search="false">
+                <option value="1">1 Persona</option>
+                @for (int x = 2; x < 11; x++)
+                {
+                    <option value=@x>@x Personas</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-2 noPadding">
+            <input type="text" class="form-control" id="datepicker" value="06/01/2015">
+        </div>
+        <div class="col-lg-2 noPadding">
+            <select id="timeSlt" class="form-control selectpicker" data-width="250px" data-live-search="false">
+                @for (int x = 1; x < 10; x++)
+                {
+                    int y = x + 2;
+                    <option value=@x>@y:00 PM</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-2 noPadding">
+            <button type="button" class="btn btn-primary btn-md form-control noPaddingbookBtn" id="bookBtn">Reservar</button>
+        </div>
+
+        </div>
+
 </div>
 
 <div class="row">
