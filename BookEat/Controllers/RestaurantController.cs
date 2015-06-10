@@ -37,12 +37,14 @@ namespace BookEat.Controllers
         //
         // POST: /Restaurant/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Restaurant newRestaurant)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                RestaurantContext restaurantContext = new RestaurantContext();
+                restaurantContext.Restaurants.Add(newRestaurant);
+                restaurantContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
