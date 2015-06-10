@@ -13,9 +13,9 @@ namespace BookEat.Controllers
         // GET: /Booking/
         public ActionResult Index()
         {
-            RestaurantContext restaurantContext = new RestaurantContext();
-            List<Restaurant> restaurants = restaurantContext.Restaurants.ToList();
-            return View(restaurants);
+            BookingContext bookingContext = new BookingContext();
+            List<Booking> bookings = bookingContext.Bookings.ToList();
+            return View(bookings);
         }
 
         //
