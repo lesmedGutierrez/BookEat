@@ -4,16 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookEat.Models;
+using System.Net;
+using System.Data.Entity;
 
 namespace BookEat.Controllers
 {
     public class RestaurantController : Controller
     {
+        private RestaurantContext restaurantContext = new RestaurantContext();
         //
         // GET: /Restaurant/
         public ActionResult Index()
         {
-            RestaurantContext restaurantContext = new RestaurantContext();
             List<Restaurant> restaurants = restaurantContext.Restaurants.ToList();
             return View(restaurants);
         }
@@ -22,8 +24,7 @@ namespace BookEat.Controllers
         // GET: /Restaurant/Details/5
         public ActionResult Details(int id)
         {
-            RestaurantContext restaurantContext = new RestaurantContext();
-            Restaurant restaurant = restaurantContext.Restaurants.Single(per => per.RestaurantID == id);
+            Restaurant restaurant = restaurantContext.Restaurants.Single(rest => rest.RestaurantID == id);
             return View(restaurant);
         }
 
@@ -42,7 +43,6 @@ namespace BookEat.Controllers
             try
             {
                 // TODO: Add insert logic here
-                RestaurantContext restaurantContext = new RestaurantContext();
                 restaurantContext.Restaurants.Add(newRestaurant);
                 restaurantContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -55,48 +55,52 @@ namespace BookEat.Controllers
 
         //
         // GET: /Restaurant/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id = 0)
         {
-            RestaurantContext restaurantContext = new RestaurantContext();
-            Restaurant restaurant = restaurantContext.Restaurants.Single(per => per.RestaurantID == id);
+            Restaurant restaurant = restaurantContext.Restaurants.Single(rest => rest.RestaurantID == id);
+            if (restaurant == null)
+            {
+                return HttpNotFound();
+            }
             return View(restaurant);
         }
 
         //
         // POST: /Restaurant/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Restaurant newRestaurant)
         {
-            try
-            {
-                // TODO: Add update logic here
-
+            // TODO: Add update logic here
+            if (ModelState.IsValid){
+                restaurantContext.Entry(newRestaurant).State = EntityState.Modified;
+                restaurantContext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(newRestaurant);
         }
 
         //
         // GET: /Restaurant/Delete/5
         public ActionResult Delete(int id)
         {
-            RestaurantContext restaurantContext = new RestaurantContext();
-            Restaurant restaurant = restaurantContext.Restaurants.Single(per => per.RestaurantID == id);
+            Restaurant restaurant = restaurantContext.Restaurants.Find(id);
+            if (restaurant == null)
+            {
+                return HttpNotFound();
+            }
             return View(restaurant);
         }
 
         //
         // POST: /Restaurant/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Restaurant delRestaurant)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                restaurantContext.Restaurants.Remove(delRestaurant);
+                restaurantContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

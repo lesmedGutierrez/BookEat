@@ -4,17 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookEat.Models;
+using System.Data.Entity;
 
 namespace BookEat.Controllers
 {
     public class BookingController : Controller
     {
+        BookingContext bookingContext = new BookingContext();
         //
         // GET: /Booking/
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            BookingContext bookingContext = new BookingContext();
-            List<Booking> bookings = bookingContext.Bookings.ToList();
+            List<Booking> bookings = bookingContext.getBookingsByUser(id);
             return View(bookings);
         }
 
@@ -22,8 +23,7 @@ namespace BookEat.Controllers
         // GET: /Booking/Details/5
         public ActionResult Details(int id)
         {
-            BookingContext bookingContext = new BookingContext();
-            Booking booking = bookingContext.Bookings.Single(per => per.BookingID == id);
+            Booking booking = bookingContext.getBookingByID(id);
             return View(booking);
         }
 
@@ -37,12 +37,13 @@ namespace BookEat.Controllers
         //
         // POST: /Booking/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Booking newBooking)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                bookingContext.Bookings.Add(newBooking);
+                bookingContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -53,48 +54,54 @@ namespace BookEat.Controllers
 
         //
         // GET: /Booking/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id = 0)
         {
-            BookingContext bookingContext = new BookingContext();
-            Booking booking = bookingContext.Bookings.Single(per => per.BookingID == id);
+            Booking booking = bookingContext.getBookingByID(id);
+            if (booking == null)
+            {
+                return HttpNotFound();
+            }
             return View(booking);
         }
 
         //
         // POST: /Booking/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Booking newBooking)
         {
-            try
-            {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                if (ModelState.IsValid)
+                {
+                    bookingContext.Entry(newBooking).State = EntityState.Modified;
+                    bookingContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(newBooking);
         }
 
         //
         // GET: /Booking/Delete/5
         public ActionResult Delete(int id)
         {
-            BookingContext bookingContext = new BookingContext();
-            Booking booking = bookingContext.Bookings.Single(per => per.BookingID == id);
+
+            Booking booking = bookingContext.getBookingByID(id);
+            if (booking == null)
+            {
+                return HttpNotFound();
+            }
             return View(booking);
         }
 
         //
         // POST: /Booking/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Booking delBooking)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                bookingContext.Bookings.Remove(delBooking);
+                bookingContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

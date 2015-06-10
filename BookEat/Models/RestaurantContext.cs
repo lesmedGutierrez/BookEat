@@ -10,6 +10,5 @@ namespace BookEat.Models
     {
         public DbSet<Restaurant> Restaurants { get; set; }
 
-        public System.Data.Entity.DbSet<BookEat.Models.Booking> Bookings { get; set; }
     }
 }
