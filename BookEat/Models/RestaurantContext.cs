@@ -9,5 +9,7 @@ namespace BookEat.Models
     public class RestaurantContext : DbContext
     {
         public DbSet<Restaurant> Restaurants { get; set; }
+
+        public System.Data.Entity.DbSet<BookEat.Models.Booking> Bookings { get; set; }
     }
 }
