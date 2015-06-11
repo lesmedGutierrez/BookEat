@@ -95,11 +95,12 @@ namespace BookEat.Controllers
         //
         // POST: /Booking/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Booking delBooking)
+        public ActionResult Delete(int id, Booking del)
         {
             try
             {
                 // TODO: Add delete logic here
+                Booking delBooking = bookingContext.getBookingByID(id);
                 bookingContext.Bookings.Remove(delBooking);
                 bookingContext.SaveChanges();
                 return RedirectToAction("Index");

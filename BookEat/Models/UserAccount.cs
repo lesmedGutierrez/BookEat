@@ -42,7 +42,7 @@ namespace BookEat.Models
         [Display(Name = "¿Recordar cuenta?")]
         public bool RememberMe { get; set; }
     }
-
+    
     public class UserAccount
     {
 
