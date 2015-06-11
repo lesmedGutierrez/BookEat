@@ -5,8 +5,8 @@ namespace BookEat.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Nombre de usuario")]
-        public string UserName { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
     }
 
     public class ManageUserViewModel
@@ -31,8 +31,8 @@ namespace BookEat.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Nombre de usuario")]
-        public string UserName { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -42,12 +42,21 @@ namespace BookEat.Models
         [Display(Name = "¿Recordar cuenta?")]
         public bool RememberMe { get; set; }
     }
-
-    public class RegisterViewModel
+    
+    public class UserAccount
     {
+
         [Required]
-        [Display(Name = "Nombre de usuario")]
-        public string UserName { get; set; }
+        [Display(Name = "Nombre")]
+        public string Firstname { get; set; }
+
+        [Required]
+        [Display(Name = "Apellido")]
+        public string Lastname { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]

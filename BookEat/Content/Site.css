@@ -40,3 +40,29 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.noPadding{
+    padding-left: 0;
+    padding-right: 0;
+}
+.noPaddingbookBtn{
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 50%;
+    width:50%;
+}
+
+.page-header-hero-img{
+    background-image: url(//media.otstatic.com/img/start_hero_images/ot2015-hero-1600-fc29224989eefc1245b935eedd6d338f.jpg);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    top: 0;
+    left: 0;
+}
+
+.titleInHeader{
+    color: rgb(66, 139, 202);
+    margin-top: 23%;
+}

@@ -13,19 +13,22 @@ using BookEat.Models;
 namespace BookEat.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class UserAccountController : Controller
     {
-        public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        private UserAccountContext userAccountContext = new UserAccountContext();
+
+        public UserAccountController() : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
+
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public UserAccountController(UserManager<ApplicationUser> userManager)
         {
             UserManager = userManager;
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
+
 
         //
         // GET: /Account/Login
@@ -45,7 +48,7 @@ namespace BookEat.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
+                var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -61,44 +64,41 @@ namespace BookEat.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/Register
+
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View("Register");
         }
 
-        //
-        // POST: /Account/Register
-        [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        [HttpPost]
+        public ActionResult Register(UserAccount newUserAccount)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                string email = newUserAccount.Email;
+                bool validUserAccount = userAccountContext.isValid(email);
+                if (validUserAccount)
                 {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    userAccountContext.UserAccounts.Add(newUserAccount);
+                    userAccountContext.SaveChanges();
                 }
-                else
-                {
-                    AddErrors(result);
-                }
+                return RedirectToAction("Index");
             }
-
-            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
-            return View(model);
+            catch
+            {
+                
+                return View();
+            }
         }
 
         //
         // POST: /Account/Disassociate
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
+
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
             ManageMessageId? message = null;
@@ -180,43 +180,6 @@ namespace BookEat.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            // Solicitar redireccionamiento al proveedor de inicio de sesión externo
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        }
-
-        //
-        // GET: /Account/ExternalLoginCallback
-        [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
-        {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            // Sign in the user with this external login provider if the user already has a login
-            var user = await UserManager.FindAsync(loginInfo.Login);
-            if (user != null)
-            {
-                await SignInAsync(user, isPersistent: false);
-                return RedirectToLocal(returnUrl);
-            }
-            else
-            {
-                // If the user does not have an account, then prompt the user to create an account
-                ViewBag.ReturnUrl = returnUrl;
-                ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
-            }
-        }
 
         //
         // POST: /Account/LinkLogin
@@ -265,7 +228,7 @@ namespace BookEat.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
