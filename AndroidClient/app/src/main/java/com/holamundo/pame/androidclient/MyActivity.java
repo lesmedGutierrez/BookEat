@@ -41,6 +41,9 @@ public class MyActivity extends Activity {
                 String emailS = email.getText().toString();
                 String contraseñaS = contraseña.getText().toString();
                 String repContraseñaS = repetirContraseña.getText().toString();
+                ConexionDB conn = new ConexionDB();
+                conn.insertUser(nombreS,apellidoS,emailS, contraseñaS);
+
 
 
             }

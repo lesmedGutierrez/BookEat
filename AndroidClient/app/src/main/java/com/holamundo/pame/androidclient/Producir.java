@@ -15,7 +15,7 @@ public class Producir extends Thread{
     String message = "";
     private int ciclo;
     private int id;
-
+/*
     public Producir(int ciclo,int id)
     {
         this.ciclo = ciclo;
@@ -56,5 +56,5 @@ public class Producir extends Thread{
         System.out.print("\n Press Enter to continue...");
     }
 }
-
+*/
 }

@@ -15,7 +15,7 @@ import java.sql.Connection;
  */
 public class ConexionDB {
 
-    private String host = "192.168.2.4";
+    private String host = "25.89.59.137";
 
 
 
@@ -59,6 +59,7 @@ public class ConexionDB {
 
     @Override
     public String toString() {
+        return null;
         //return "Servidor: " + Servidor + "Fecha: " + Fecha + "Cedula: " + Cedula + " Nombre: " + Nombre;
     }
 }

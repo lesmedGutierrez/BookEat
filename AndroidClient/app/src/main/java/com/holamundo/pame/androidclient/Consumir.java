@@ -59,7 +59,7 @@ public class Consumir extends Thread {
 
         Gson gson = new Gson();
         ConexionDB def_message = gson.fromJson("{}",ConexionDB.class); //Deserializa un objeto
-        def_message.insertMensaje(SERVERIP);
+
 
     }
 
