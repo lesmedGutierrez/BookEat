@@ -10,20 +10,17 @@ namespace BookEat.Models
     {
         public DbSet<UserAccount> UserAccounts { get; set; }
 
-        public bool isValid (string email)
+        public bool exists (string email)
         {
-            return exists(email);
-        }
-
-        private bool exists(string email)
-        {
-            return getUserAccountByEmail(email) == null ? true : false; 
-
+            return getUserAccountByEmail(email) != null ? true : false;
         }
 
         public UserAccount getUserAccountByEmail(string email)
         {
-            return UserAccounts.Single(user => user.Email == email);
+
+            UserAccount myUser = UserAccounts.SingleOrDefault(user => user.Email == email);
+            return myUser;
+
         }
     }
 }

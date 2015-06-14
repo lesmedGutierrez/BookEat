@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookEat.Models
 {
@@ -43,9 +44,10 @@ namespace BookEat.Models
         public bool RememberMe { get; set; }
     }
 
+    [Table("UserAccount")]
     public class UserAccount
     {
-
+        public int UserAccountID { get; set; }
         [Required]
         [Display(Name = "Nombre")]
         public string Firstname { get; set; }
@@ -64,9 +66,6 @@ namespace BookEat.Models
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmar contraseña")]
-        [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
-        public string ConfirmPassword { get; set; }
+
     }
 }
