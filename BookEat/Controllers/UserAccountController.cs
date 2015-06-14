@@ -46,6 +46,7 @@ namespace BookEat.Controllers
             {
                 string email = credentials.Email;
                 FormsAuthentication.SetAuthCookie(email, false);
+                string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
             }
             
 
