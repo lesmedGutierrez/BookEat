@@ -43,12 +43,9 @@ namespace BookEat.Models
         [Display(Name = "¿Recordar cuenta?")]
         public bool RememberMe { get; set; }
     }
-<<<<<<< HEAD
 
     [Table("UserAccount")]
-=======
-    
->>>>>>> 70b163c6286bbee736697e9dbbd2db7e5c145e7b
+
     public class UserAccount
     {
         public int UserAccountID { get; set; }

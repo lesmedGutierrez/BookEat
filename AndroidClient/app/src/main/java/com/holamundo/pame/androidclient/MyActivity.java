@@ -17,31 +17,35 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-
-       Button bProducir =(Button)findViewById(R.id.bSend);
-
-       Button bConsumir =(Button) findViewById(R.id.bReceiving);
+        Button bRegistrar = (Button)findViewById(R.id.btnRegistrar);
 
 
-        final TextView texto = (TextView) findViewById(R.id.etMessage);//Se define el campo del texto
+       //Button bProducir =(Button)findViewById(R.id.bSend);
+
+       //Button bConsumir =(Button) findViewById(R.id.bReceiving);
+
+
+        final TextView nombre = (TextView) findViewById(R.id.txtNombre);//Se define el campo del texto
+        final TextView apellido = (TextView) findViewById(R.id.txtApellido);//Se define el campo del texto
+        final TextView email = (TextView) findViewById(R.id.txtEmail);//Se define el campo del texto
+        final TextView contraseña = (TextView) findViewById(R.id.txtContrasena);//Se define el campo del texto
+        final TextView repetirContraseña = (TextView) findViewById(R.id.txtRepetirContraseña);//Se define el campo del texto
+
 
         //new connectTask().execute("");
 
-        bConsumir.setOnClickListener(new OnClickListener() {
-            int producerId = 1;
-            int num = 1;
-
+        bRegistrar.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                String textoI = texto.getText().toString();
-                num = Integer.parseInt(textoI);
+                String nombreS = nombre.getText().toString();
+                String apellidoS = apellido.getText().toString();
+                String emailS = email.getText().toString();
+                String contraseñaS = contraseña.getText().toString();
+                String repContraseñaS = repetirContraseña.getText().toString();
 
-                Producir producer = new Producir(num, producerId);
-                producer.start();
-                producerId++;
 
             }
         });
-
+/*
         bProducir.setOnClickListener(new OnClickListener() {
             int workedId = 1;
 
@@ -52,7 +56,7 @@ public class MyActivity extends Activity {
                 workedId++;
             }
         });
-
+*/
 
     }
 }

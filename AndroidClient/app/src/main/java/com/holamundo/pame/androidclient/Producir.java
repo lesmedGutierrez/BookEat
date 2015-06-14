@@ -32,7 +32,7 @@ public class Producir extends Thread{
             InetAddress serverAddr = InetAddress.getByName(SERVERIP);
             Socket socket = new Socket(serverAddr, SERVERPORT); //New TcpClient
 
-            DefaultMensaje msg = new DefaultMensaje("AndroidApp", "Persona" + i, "Cedula:" + i);
+            ConexionDB msg = new ConexionDB("AndroidApp", "Persona" + i, "Cedula:" + i);
             Gson gson = new Gson();
             String jsonified = gson.toJson(msg);
             byte[] data = jsonified.getBytes("UTF-8");
