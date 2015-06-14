@@ -1,5 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace BookEat.Models
 {
@@ -43,12 +47,9 @@ namespace BookEat.Models
         [Display(Name = "¿Recordar cuenta?")]
         public bool RememberMe { get; set; }
     }
-<<<<<<< HEAD
 
     [Table("UserAccount")]
-=======
-    
->>>>>>> 70b163c6286bbee736697e9dbbd2db7e5c145e7b
+
     public class UserAccount
     {
         public int UserAccountID { get; set; }
@@ -69,7 +70,5 @@ namespace BookEat.Models
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
-
-
     }
 }

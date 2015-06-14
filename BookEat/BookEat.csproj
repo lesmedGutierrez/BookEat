@@ -295,6 +295,12 @@
     <Content Include="Views\Booking\Create.cshtml" />
     <Content Include="Views\Booking\Edit.cshtml" />
     <Content Include="Views\Booking\Delete.cshtml" />
+    <Content Include="Scripts\moment.min.js.map">
+      <DependentUpon>moment.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\moment-with-locales.min.js.map">
+      <DependentUpon>moment-with-locales.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
