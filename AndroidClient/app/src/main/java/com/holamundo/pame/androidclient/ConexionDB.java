@@ -15,44 +15,73 @@ import java.sql.Connection;
  */
 public class ConexionDB {
 
-    private String host = "25.89.59.137";
+    private String host = "192.168.2.4";
+    public int code = 0;
+    //private String host = "25.89.59.137";
 
 
 
-    public void insertUser(String nombre, String apellido, String email, String contraseña) {
-        try {
 
-            String driver = "net.sourceforge.jtds.jdbc.Driver";
+    public void insertUser(String nom, String ape, String em, String contra) {
 
-            String url = "jdbc:jtds:sqlserver://"+host+";databaseName=BSO;user=BSO;password=321";
+        final String nombre = nom;
+        final String apellido = ape;
+        final String email = em;
+        final String contraseña = contra;
 
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-            Class.forName(driver).newInstance();
 
-            Connection conn = DriverManager.getConnection(url);
-            Statement st = conn.createStatement();
-            String comando = "insert into UserAccount values" + nombre + apellido+ email+ contraseña;
-            /*String sql = "insertarMsj ?,?,?,?";
-            PreparedStatement preparedStmt = conn.prepareStatement(sql);
-            preparedStmt.setString(1, Servidor);
-            preparedStmt.setString(2, Fecha);
-            preparedStmt.setString(3, Cedula);
-            preparedStmt.setString(4, Nombre);
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
 
-            preparedStmt.execute();*/
+                    try {
 
-            st.close();
-            conn.close();
-        } catch (SQLException sqle) {
-            System.out.println("Sql exception " + sqle);
-        }
-        catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+                        String driver = "net.sourceforge.jtds.jdbc.Driver";
+
+                        String url = "jdbc:jtds:sqlserver://"+host+";databaseName=BookEat;user=sa;password=12345";
+
+                        //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+                        Class.forName(driver).newInstance();
+
+                        Connection conn = DriverManager.getConnection(url);
+                        Statement st = conn.createStatement();
+                        //String comando = "insert into UserAccount(Firstname, Lastname, Email, Password) values " +
+                          //      "( '" +  nombre +"','" + apellido + "','" + email + "','" + contraseña + "')" ;
+                        String sql = "insert into UserAccount(Firstname,Lastname,Email,Password) values ('?','?','?','?')";
+                        PreparedStatement preparedStmt = conn.prepareStatement(sql);
+                        preparedStmt.setString(1, nombre);
+                        preparedStmt.setString(2, apellido);
+                        preparedStmt.setString(3, email);
+                        preparedStmt.setString(4, contraseña);
+
+                        preparedStmt.execute();
+
+                        st.close();
+                        conn.close();
+                    } catch (SQLException sqle) {
+                        System.out.println("Sql exception " + sqle);
+                    }
+                    catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+
+                    //Your code goes here
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+
     }
 
 
