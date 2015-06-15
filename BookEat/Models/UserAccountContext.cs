@@ -14,12 +14,22 @@ namespace BookEat.Models
         {
             return getUserAccountByEmail(email) != null ? true : false;
         }
-
+        /*
+        Must throw an exception - Fix later.
+        */
         public UserAccount getUserAccountByEmail(string email)
         {
 
             UserAccount myUser = UserAccounts.SingleOrDefault(user => user.Email == email);
             return myUser;
+
+        }
+
+        public bool hasValidCredentials(UserAccount credentials)
+        {
+
+            return UserAccounts.FirstOrDefault(user => (user.Email == credentials.Email)) != null ? true : false;
+            
 
         }
     }

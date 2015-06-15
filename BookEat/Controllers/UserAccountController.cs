@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Owin.Security;
 using BookEat.Models;
+using System.Web.Security;
 
 namespace BookEat.Controllers
 {
@@ -30,9 +31,24 @@ namespace BookEat.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Login(UserAccount credentials)
+        {
+            bool hasValidCredentials = userAccountContext.hasValidCredentials(credentials);
+            
+            if (hasValidCredentials)
+            {
+                string email = credentials.Email;
+                FormsAuthentication.SetAuthCookie(email, false);
+            }
+            
+
             return View();
         }
 
@@ -48,14 +64,16 @@ namespace BookEat.Controllers
         [HttpPost]
         public ActionResult Register(UserAccount newUserAccount)
         {
-                string email = newUserAccount.Email;
-                bool userAccountExists = userAccountContext.exists(email);
-                if (!userAccountExists)
-                {
-                    userAccountContext.UserAccounts.Add(newUserAccount);
-                    userAccountContext.SaveChanges();
-                }
-                return RedirectToAction("Index");
+            string email = newUserAccount.Email;
+            bool userAccountExists = userAccountContext.exists(email);
+            if (!userAccountExists)
+            {
+                userAccountContext.UserAccounts.Add(newUserAccount);
+                userAccountContext.SaveChanges();
+
+            }
+                
+            return RedirectToAction("Index");
             
         }
 
