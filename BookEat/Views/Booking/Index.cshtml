@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Lista de Reservaciones</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear una reservación", "Create")
 </p>
 <table class="table">
     <tr>
@@ -54,9 +54,9 @@
             @Html.DisplayFor(modelItem => item.RestaurantID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BookingID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BookingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BookingID })
+            @Html.ActionLink("Editar", "Edit", new { id=item.BookingID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.BookingID }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.BookingID })
         </td>
     </tr>
 }

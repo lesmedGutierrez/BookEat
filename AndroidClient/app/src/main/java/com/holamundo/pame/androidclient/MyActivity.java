@@ -1,6 +1,7 @@
 package com.holamundo.pame.androidclient;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
@@ -17,7 +18,7 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        Button bRegistrar = (Button)findViewById(R.id.btnRegistrar);
+        Button bRegistrar = (Button)findViewById(R.id.btnLogin);
 
 
        //Button bProducir =(Button)findViewById(R.id.bSend);
@@ -28,7 +29,7 @@ public class MyActivity extends Activity {
         final TextView nombre = (TextView) findViewById(R.id.txtNombre);//Se define el campo del texto
         final TextView apellido = (TextView) findViewById(R.id.txtApellido);//Se define el campo del texto
         final TextView email = (TextView) findViewById(R.id.txtEmail);//Se define el campo del texto
-        final TextView contraseña = (TextView) findViewById(R.id.txtContrasena);//Se define el campo del texto
+        final TextView contraseña = (TextView) findViewById(R.id.txtContraseña);//Se define el campo del texto
         final TextView repetirContraseña = (TextView) findViewById(R.id.txtRepetirContraseña);//Se define el campo del texto
 
 
@@ -43,11 +44,9 @@ public class MyActivity extends Activity {
                 String repContraseñaS = repetirContraseña.getText().toString();
                 ConexionDB conn = new ConexionDB();
                 conn.insertUser(nombreS,apellidoS,emailS, contraseñaS);
-
-
-
             }
         });
+
 /*
         bProducir.setOnClickListener(new OnClickListener() {
             int workedId = 1;

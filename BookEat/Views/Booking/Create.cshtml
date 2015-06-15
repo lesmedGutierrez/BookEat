@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Reservaciones</h2>
 
 
 @using (Html.BeginForm()) 
@@ -13,14 +13,14 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Booking</h4>
+        <h4>Crear una reservación</h4>
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Guests, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Guests)
+                @Html.EditorFor(model => model.Guests, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Guests)
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BookingDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BookingDate)
+                @Html.EditorFor(model => model.BookingDate, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BookingDate)
             </div>
         </div>
@@ -67,14 +67,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Reservar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar a la lista", "Index")
 </div>
 
 @section Scripts {
