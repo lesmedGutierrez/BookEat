@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:id="@+id/btnRegistrar"
+        android:id="@+id/btnLogin"
         android:layout_alignTop="@+id/btnRegistrarse"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
