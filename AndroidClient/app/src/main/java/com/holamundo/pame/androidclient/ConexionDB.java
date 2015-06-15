@@ -15,9 +15,9 @@ import java.sql.Connection;
  */
 public class ConexionDB {
 
-    private String host = "192.168.2.4";
+    //private String host = "192.168.2.4";
     public int code = 0;
-    //private String host = "25.89.59.137";
+    private String host = "25.89.59.137";
 
 
 
@@ -46,14 +46,14 @@ public class ConexionDB {
 
                         Connection conn = DriverManager.getConnection(url);
                         Statement st = conn.createStatement();
-                        //String comando = "insert into UserAccount(Firstname, Lastname, Email, Password) values " +
-                          //      "( '" +  nombre +"','" + apellido + "','" + email + "','" + contraseña + "')" ;
-                        String sql = "insert into UserAccount(Firstname,Lastname,Email,Password) values ('?','?','?','?')";
-                        PreparedStatement preparedStmt = conn.prepareStatement(sql);
-                        preparedStmt.setString(1, nombre);
-                        preparedStmt.setString(2, apellido);
-                        preparedStmt.setString(3, email);
-                        preparedStmt.setString(4, contraseña);
+                        String comando = "insert into UserAccount(Firstname, Lastname, Email, Password) values " +
+                                "( '" +  nombre +"','" + apellido + "','" + email + "','" + contraseña + "')" ;
+                        //String sql = "insert into UserAccount(Firstname,Lastname,Email,Password) values ('?','?','?','?')";
+                        PreparedStatement preparedStmt = conn.prepareStatement(comando);
+                        //preparedStmt.setString(1, nombre);
+                        //preparedStmt.setString(2, apellido);
+                        //preparedStmt.setString(3, email);
+                        //preparedStmt.setString(4, contraseña);
 
                         preparedStmt.execute();
 

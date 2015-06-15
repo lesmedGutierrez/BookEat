@@ -28,7 +28,7 @@ public class MyActivity extends Activity {
         final TextView nombre = (TextView) findViewById(R.id.txtNombre);//Se define el campo del texto
         final TextView apellido = (TextView) findViewById(R.id.txtApellido);//Se define el campo del texto
         final TextView email = (TextView) findViewById(R.id.txtEmail);//Se define el campo del texto
-        final TextView contraseña = (TextView) findViewById(R.id.txtContrasena);//Se define el campo del texto
+        final TextView contraseña = (TextView) findViewById(R.id.txtContraseña);//Se define el campo del texto
         final TextView repetirContraseña = (TextView) findViewById(R.id.txtRepetirContraseña);//Se define el campo del texto
 
 
