@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace BookEat.Models
 {
@@ -7,6 +12,11 @@ namespace BookEat.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class ExternalLoginListViewModel
+    {
+        public string ReturnUrl { get; set; }
     }
 
     public class ManageUserViewModel
@@ -42,10 +52,12 @@ namespace BookEat.Models
         [Display(Name = "¿Recordar cuenta?")]
         public bool RememberMe { get; set; }
     }
-    
+
+    [Table("UserAccount")]
+
     public class UserAccount
     {
-
+        public int UserAccountID { get; set; }
         [Required]
         [Display(Name = "Nombre")]
         public string Firstname { get; set; }
@@ -63,10 +75,5 @@ namespace BookEat.Models
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmar contraseña")]
-        [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
-        public string ConfirmPassword { get; set; }
     }
 }
