@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@if (FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != null)
 {
     using (Html.BeginForm("LogOff", "UserAccount", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -16,16 +16,8 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        @if (Request.IsAuthenticated)
-        {
-            <li>@Html.ActionLink("Prueba", "Register", "UserAccount", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-            <li>@Html.ActionLink("Salir", "Login", "UserAccount", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-        }
-        else
-        {
-            <li>@Html.ActionLink("Registrarse", "Register", "UserAccount", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-            <li>@Html.ActionLink("Iniciar sesión", "Login", "UserAccount", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-        }
+        <li>@Html.ActionLink("Registrarse", "Register", "UserAccount", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Iniciar sesión", "Login", "UserAccount", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
 
