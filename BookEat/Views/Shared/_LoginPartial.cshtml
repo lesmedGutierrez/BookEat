@@ -9,7 +9,9 @@
             <li>
                 @Html.ActionLink("Hola " + FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Administrar" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+            <li>
+                @Html.ActionLink("Logout", "Logout", "UserAccount")
+            </li>
         </ul>
     }
 }
