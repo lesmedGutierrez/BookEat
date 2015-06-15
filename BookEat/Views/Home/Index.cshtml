@@ -1,38 +1,47 @@
-﻿@{
+﻿@using BookEat.Models;
+@model BookEat.Models.Booking
+
+@{
     ViewBag.Title = "Home";
 }
-
-<div class="jumbotron page-header-hero-img">
-    <h1 class="titleInHeader" style="color: rgb(66, 139, 202)">Haga su reservación</h1>
-    <div class="row no-gutter">
-        <div class="col-lg-2 noPadding">
-            <input type="text" class="form-control" placeholder="Busque un restaurante", id="searchBtn">
+@using (Html.BeginForm())
+{
+    <div class="jumbotron page-header-hero-img">
+        <h1 class="titleInHeader" style="color: rgb(66, 139, 202)">Haga su reservación</h1>
+        <div class="row no-gutter">
+            <div class="col-lg-2 noPadding">
+                <input type="text" class="form-control" placeholder="Busque un restaurante" id="searchTxt">
+                <!--@Html.EditorFor(book => book.RestaurantID)-->
+            </div>
+            <div class="col-lg-2 noPadding">
+                <select id="peopleSlt" class="form-control selectpicker show-menu-arrow" data-live-search="false">
+                    <option value="1">1 Persona</option>
+                    @for (int x = 2; x < 11; x++)
+                    {
+                        <option value=@x>@x Personas</option>
+                    }
+                </select>
+                -
+            </div>
+            <div class="col-lg-2 noPadding">
+                <input type="text" class="form-control" id="datepicker" value="06/01/2015">
+            </div>
+            <div class="col-lg-2 noPadding">
+                <select id="timeSlt" class="form-control selectpicker" data-width="250px" data-live-search="false">
+                    @for (int x = 1; x < 10; x++)
+                    {
+                        int y = x + 2;
+                        <option value=@x>@y:00 PM</option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-2 noPadding">
+                <input type="text" class="form-control" placeholder="Digite sus solicitudes especiales" id="requiresTxt">
+            </div>
+            <div class="col-lg-2 noPadding">
+                <button type="button" class="btn btn-primary btn-md form-control noPaddingbookBtn" id="bookBtn">Reservar</button>
+                <!--<input type="submit" value="Reservar" class="btn btn-default" />-->
+            </div>
         </div>
-        <div class="col-lg-2 noPadding">
-            <select id="peopleSlt" class="form-control selectpicker show-menu-arrow" data-live-search="false">
-                <option value="1">1 Persona</option>
-                @for (int x = 2; x < 11; x++)
-                {
-                    <option value=@x>@x Personas</option>
-                }
-            </select>
-        </div>
-        <div class="col-lg-2 noPadding">
-            <input type="text" class="form-control" id="datepicker" value="06/01/2015">
-        </div>
-        <div class="col-lg-2 noPadding">
-            <select id="timeSlt" class="form-control selectpicker" data-width="250px" data-live-search="false">
-                @for (int x = 1; x < 10; x++)
-                {
-                    int y = x + 2;
-                    <option value=@x>@y:00 PM</option>
-                }
-            </select>
-        </div>
-        <div class="col-lg-2 noPadding">
-            <button type="button" class="btn btn-primary btn-md form-control noPaddingbookBtn" id="bookBtn">Reservar</button>
-        </div>
-
     </div>
-
-</div>
+} 

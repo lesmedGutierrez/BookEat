@@ -10,12 +10,12 @@ namespace BookEat.Controllers
 {
     public class BookingController : Controller
     {
-        BookingContext bookingContext = new BookingContext();
+        private BookingContext bookingContext = new BookingContext();
         //
         // GET: /Booking/
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            List<Booking> bookings = bookingContext.getBookingsByUser(id);
+            List<Booking> bookings = bookingContext.Bookings.ToList();
             return View(bookings);
         }
 
@@ -34,6 +34,11 @@ namespace BookEat.Controllers
             return View();
         }
 
+        public ActionResult Book(Booking newBooking)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         //
         // POST: /Booking/Create
         [HttpPost]
@@ -41,10 +46,14 @@ namespace BookEat.Controllers
         {
             try
             {
+                /*newBooking.RestaurantID = 1;
+                newBooking.UserAccountID = 1;
+                newBooking.Guests = 1;
+                newBooking.SpecialRequests = "Close to the windows";*/
                 // TODO: Add insert logic here
                 bookingContext.Bookings.Add(newBooking);
                 bookingContext.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
