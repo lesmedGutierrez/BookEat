@@ -20,8 +20,27 @@ public class LoginActivity extends Activity{
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MyActivity.class);
-                startActivity(i);
+
+                ConexionDB conn = new ConexionDB();
+                UserAccount ua = conn.loginUser("lesmed@gmail.com", "");
+
+                if (ua.UserAccountID != -1){
+
+                    Intent i = new Intent(getApplicationContext(),BookingActivity.class);
+
+                    i.putExtra("firstname",ua.FirstName );
+                    i.putExtra("lastname",ua.Lastname );
+                    i.putExtra("email",ua.Email );
+                    i.putExtra("password",ua.Password );
+                    i.putExtra("id",ua.UserAccountID );
+
+
+
+                    startActivity(i);
+                }
+
+
+
 
             }
         });
