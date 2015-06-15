@@ -3,6 +3,7 @@ package com.holamundo.pame.androidclient;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 
@@ -16,8 +17,10 @@ public class BookingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booking_acitvity);
 
+        ListView  listView_reservaciones = (ListView)findViewById(R.id.listView_Reservaciones);
+
         Intent i = getIntent();
-        
+
         String FirstName = i.getStringExtra("firstname");
         String LastName = i.getStringExtra("lastname");
         String Email = i.getStringExtra("email");
@@ -25,9 +28,10 @@ public class BookingActivity extends Activity {
         String id = i.getStringExtra("id");
 
 
+        String[] items = new String[] {FirstName, LastName, Email, password,id};
 
-
-        ListView  listView = (ListView)findViewById(R.id.listView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
+        listView_reservaciones.setAdapter(adapter);
 
 
     }

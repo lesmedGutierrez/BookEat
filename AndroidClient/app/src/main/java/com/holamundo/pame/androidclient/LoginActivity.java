@@ -32,7 +32,7 @@ public class LoginActivity extends Activity{
                     i.putExtra("lastname",ua.Lastname );
                     i.putExtra("email",ua.Email );
                     i.putExtra("password",ua.Password );
-                    i.putExtra("id",ua.UserAccountID );
+                    i.putExtra("id",ua.UserAccountID+"");
 
 
 
