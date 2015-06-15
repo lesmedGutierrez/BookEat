@@ -17,5 +17,6 @@ namespace BookEat.Models
         public string SpecialRequests { get; set; }
         public int UserAccountID { get; set; }
         public int RestaurantID { get; set; }
+
     }
 }
