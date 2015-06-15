@@ -16,6 +16,7 @@ namespace BookEat.Controllers
     {
         private UserAccountContext userAccountContext = new UserAccountContext();
 
+
         public UserAccountController() 
         {
 
@@ -40,19 +41,31 @@ namespace BookEat.Controllers
         [HttpPost]
         public ActionResult Login(UserAccount credentials)
         {
+           
             bool hasValidCredentials = userAccountContext.hasValidCredentials(credentials);
-            
+
             if (hasValidCredentials)
             {
                 string email = credentials.Email;
                 FormsAuthentication.SetAuthCookie(email, false);
-                string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
+                return RedirectToAction("Index", "Home");
             }
-            
+            else{
+                ModelState.AddModelError("","Los datos de login son incorrectos");
+            }
 
+            
             return View();
         }
 
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
+        }
 
 
         [AllowAnonymous]

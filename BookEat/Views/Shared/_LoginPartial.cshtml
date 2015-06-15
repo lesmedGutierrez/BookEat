@@ -7,7 +7,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Administrar" })
+                @Html.ActionLink("Hola " + FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Administrar" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
         </ul>
@@ -16,8 +16,16 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registrarse", "Register", "UserAccount", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Iniciar sesión", "Login", "UserAccount", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        @if (Request.IsAuthenticated)
+        {
+            <li>@Html.ActionLink("Prueba", "Register", "UserAccount", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Salir", "Login", "UserAccount", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Registrarse", "Register", "UserAccount", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Iniciar sesión", "Login", "UserAccount", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        }
     </ul>
 }
 

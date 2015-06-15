@@ -301,6 +301,7 @@
     <Content Include="Scripts\moment-with-locales.min.js.map">
       <DependentUpon>moment-with-locales.min.js</DependentUpon>
     </Content>
+    <Content Include="Views\UserAccount\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
