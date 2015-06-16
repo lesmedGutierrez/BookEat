@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name != null)
+@if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "UserAccount", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
