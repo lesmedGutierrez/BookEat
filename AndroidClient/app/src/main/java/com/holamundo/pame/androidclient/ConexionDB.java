@@ -23,13 +23,9 @@ import java.sql.Connection;
  */
 public class ConexionDB {
 
-    private String host = "192.168.2.4";
+    //private String host = "192.168.2.4";
     public int code = 0;
-    //private String host = "25.89.59.137";
-
-
-
-
+    private String host = "172.26.7.58";
     public void insertUser(String nom, String ape, String em, String contra) {
 
         final String nombre = nom;
@@ -135,12 +131,7 @@ public class ConexionDB {
                             ua.FirstName = firstName;
                             ua.Lastname = lastName;
                             ua.UserAccountID = id;
-
-
-
                         }
-
-
                         st.close();
                         conn.close();
                     } catch (SQLException sqle) {
@@ -155,8 +146,6 @@ public class ConexionDB {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-
-
                     //Your code goes here
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -164,18 +153,14 @@ public class ConexionDB {
             }
 
         });
-
-
         thread.start();
-
         while(thread.isAlive()){
             //System.out.println( "Thread de login vivo");
             try {
                 new Thread().wait(500);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }catch (Exception e){
-
             }
         }
         return ua;
@@ -203,7 +188,7 @@ public class ConexionDB {
                         Connection conn = DriverManager.getConnection(url);
                         Statement st = conn.createStatement();
                         String comando = "select b.Guests, b.BookingDate, b.ArrivalDate, b.SpecialRequests,r.Name " +
-                                "from Booking b, Restaurant r where UserAccountID="+ UserAccountID+ " and b.RestaurantID = r.RestaurantID;
+                                "from Booking b, Restaurant r where UserAccountID="+ UserAccountID+ " and b.RestaurantID = r.RestaurantID";
 
                         //String sql = "insert into UserAccount(Firstname,Lastname,Email,Password) values ('?','?','?','?')";
                         PreparedStatement preparedStmt = conn.prepareStatement(comando);
@@ -220,11 +205,7 @@ public class ConexionDB {
                             String email = resultSet.getString("Email");
                             String pass = resultSet.getString("Password");
                             int id = resultSet.getInt("UserAccountID");
-                            ua.Email = email;
-                            ua.Password = pass;
-                            ua.FirstName = firstName;
-                            ua.Lastname = lastName;
-                            ua.UserAccountID = id;
+
                             UserAccount ua2=new UserAccount(id,firstName,lastName,email,pass);
                             listUA.add(ua2);
 
